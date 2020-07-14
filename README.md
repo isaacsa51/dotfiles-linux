@@ -34,4 +34,5 @@ To make this dotfiles work you need those programs:
 Just backup your current dotfiles and paste the new files into .config or where you have installed your .files
 
 ## GTK themes used
-	- Canvas-dark
+
+- Canvas-dark
