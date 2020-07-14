@@ -2,7 +2,7 @@
 
   
 
-#  i3 Gaps = polybar
+#  i3 gaps + polybar
 
   
 
