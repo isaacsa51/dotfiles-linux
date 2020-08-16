@@ -1,0 +1,118 @@
+# SETTINGS
+set $mod Mod4
+focus_follows_mouse yes
+
+# THEME
+gaps inner 12
+gaps outer 2
+default_border pixel 0
+default_floating_border pixel 0
+font pango:Iosevka Nerd Font 10
+for_window [class="^.*"] border pixel 0
+for_window [class="."] focus
+border_radius 0
+
+#set_from_resource $primary *.color15 #f8f8f8
+#set_from_resource $accent *.color5 #e8e8e8e8
+#set_from_resource $dark *.color0 #141414
+
+#client.focused $primary $dark $primary $primary $primary
+#client.unfocused $accent $dark $accent $dark $dark
+#client.background $dark
+
+# STARTUP
+exec_always --no-startup-id $HOME/.config/i3/startup/all.sh &
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh &
+exec_always xrandr --output eDP1 --mode 1366x768 --pos 1920x120 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+
+# APPS
+bindsym $mod+Return exec alacritty
+bindsym $mod+w exec firefox
+bindsym $mod+q kill
+bindsym $mod+f exec nautilus
+bindsym $mod+c exec code
+bindsym $mod+space exec rofi -show drun -theme config-global
+bindsym Mod1+Tab exec rofi -show window -theme config-switcher
+bindsym $mod+Shift+s exec "flameshot gui"
+
+# FOCUS
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus Down
+
+# SPLIT
+bindsym $mod+h split h;
+bindsym $mod+v split v;
+
+# MOVE
+bindsm $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move Down
+
+# RESIZE
+bindsym $mod+bracketright resize grow width 2 px or 2 ppt
+bindsym $mod+bracketleft resize shrink width 2 px or 2 ppt
+bindsym $mod+minus resize shrink height 2 px or 2 ppt
+bindsym $mod+equal resize grow height 2 px or 2 ppt
+bindsym $mod+Control+bracketright gaps inner all plus 2
+bindsym $mod+Control+bracketleft gaps inner all minus 2
+bindsym $mod+Control+minus gaps outer all minus 2
+bindsym $mod+Control+equal gaps outer all plus 2
+
+# LAYOUTS
+floating_modifier $mod
+bindsym $mod+Shift+f fullscreen
+bindsym $mod+Shift+space floating toggle
+
+# WORKSPACES
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+period move workspace to output right
+bindsym $mod+comma move workspace to output left
+workspace 1 output eDP-1 HDMI-1
+workspace 2 output eDP-1 HDMI-1
+workspace 3 output eDP-1 HDMI-1
+workspace 4 output HDMI-1 eDP-1
+workspace 5 output HDMI-1 eDP-1
+workspace 6 output eDP-1 HDMI-1
+workspace 7 output HDMI-1 eDP-1
+
+#KEYBINDS
+ # - Restart i3wm - #
+bindsym $mod+Shift+r restart
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+ # - Show notification panel from Deadd app - #
+bindsym $mod+n exec kill -s USR1 $(pidof deadd-notification-center)
+
+ # - Media controls - #
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+ # - Screen brightness controls - #
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20

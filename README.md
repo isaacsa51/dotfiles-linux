@@ -1,38 +1,37 @@
-[Preview](previews/base16.jpg "Screenshot")
+# i3-gaps & Polybar setup
 
-  
+Personal config through my usage of Arch-based linux distros using the following programs and changes.
 
-#  i3 gaps + polybar
-
-  
-
-As the screenshot above these are my dotfiles that are needed to configure the setup.
-
-###  Requirements
-
-  
-
-To make this dotfiles work you need those programs:
-
+##### Base programs
 
 - Alacritty
-
 - i3 gaps
-
 - Polybar
-
-- tryOne's Picom fork
-
-- Nautilus
-
+- Picom fork
 - lxAppearance
 
-  
+### One dark/Nord ***(11/08/2020)***
 
-##  Installation
+![One dark/Nord setup](previews/atom-nord.jpg)  
 
-Just backup your current dotfiles and paste the new files into .config or where you have installed your .files
+#### Used
 
-## GTK themes used
+- ***GTK Theme:*** Qoqir-dark
+  - ***Icons:*** Flattery-dark
+- ***Font:*** Iosevka Nerd Font
+- ***File Manager:*** Nautilus
+- ***ZSH Theme:*** juanghurtado
+- ***Cursor:*** Bibata Oil
 
-- Canvas-dark
+### Base 16 ***(12/07/2020)***
+
+![base16 setup](previews/base16.jpg)  
+
+#### Used
+
+- ***GTK Theme:*** Canvas-dark
+	- ***Icons:*** Vimix
+- ***Font:*** JetBrains mono or SF Pro Display
+- ***File Manager:*** Nautilus
+- ***ZSH Theme:*** Spaceship
+- ***Cursor:*** Bibata Oil

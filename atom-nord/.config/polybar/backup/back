@@ -1,0 +1,205 @@
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
+screenchange-reload = true
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+; Define fallback values used by all module formats
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-underline =
+format-overline =
+format-spacing =
+format-padding =
+format-margin =
+format-offset =
+
+[colors]
+background = #2e3440
+background-alt = #2e3440
+foreground = #a6b5c5
+foreground-alt = #6b859e
+red = #ec5252
+
+
+[bar/mainbar-i3]
+monitor-strict = false
+override-redirect = false
+width = 100%
+height = 32
+offset-x = 10%
+offset-y = 0.0%
+radius = 0.0
+radius-top = 4
+radius-bottom = 4
+fixed-center = true
+bottom = false
+;separator = |
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 4
+line-color = #f00
+
+border-size = 6
+border-left-size = 15
+border-right-size = 15
+;border-top-size = 0
+border-bottom-size = 0
+border-color = #00000000
+
+padding-left = 3
+padding-right = 3
+
+module-margin-left = 1
+module-margin-right = 1
+
+; Enable support for inter-process messaging
+; See the Messaging wiki page for more details.
+cursor-click = pointer
+enable-ipc = true
+wm-restack = i3
+
+font-0 = "iosevka Nerd Font:size=10;3"
+font-1 = "Material Icons:size=13;4"
+font-2 = "Font Awesome 5 Free Regular:size=10;1"
+font-3 = "Font Awesome 5 Free Solid:size=10;1"
+
+modules-left = mpd i3
+modules-center = date
+modules-right = pulseaudio2 network battery clock
+
+tray-detached = false
+tray-offset-x = 5
+tray-offset-y = 0
+tray-padding = 0
+tray-maxsize = 20
+tray-scale = 1.0
+tray-position = right
+tray-background = #2e3440
+
+[module/date]
+type = internal/date
+interval = 5
+
+time = %A, %B %d, %Y
+
+label = %date% %time%
+label-foreground = #e5e9f0
+
+[module/clock]
+type = internal/date
+interval = 5
+time ="%%{F#af3a03}%%{T2}%%{T-}%%{F-}%I:%M %p"
+label =%time%
+format=<label>
+format-foreground = #e5e9f0
+format-background = ${colors.background}
+format-prefix-foreground = ${colors.foreground}
+
+[module/pulseaudio2]
+type = internal/alsa
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+;headphone-id = 16
+;mapped = true
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+format-muted-prefix = " "
+label-muted = MUTE
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+
+[module/i3]
+type = internal/i3
+pin-workspaces = false
+enable-click = true
+enable-scroll = true
+format-padding = 0
+index-sort = true
+
+label-focused = %name%
+label-focused-foreground= #ab4642
+label-focused-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %name%
+label-unfocused-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 1
+
+; visible = Active workspace on unfocused monitor
+label-visible = %name%
+label-visible-padding = 1
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%!
+label-urgent-background = #ab4642
+label-urgent-padding = 1
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-charging-padding = 1
+format-charging-foreground = ${colors.foreground}
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-padding = 1
+format-discharging-foreground = ${colors.foreground}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+label-full =  100% 
+label-full-foreground = ${colors.foreground}
+
+[module/network]
+type = internal/network
+
+interface = wlp6s0
+interval = 5.0
+accumulate-stats = true
+unknown-as-up = true
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-padding = 1
+format-connected-foreground = ${colors.foreground}
+
+ramp-signal-0 = 
+label-connected = %essid%
+
+format-disconnected = Not connected
+format-disconnected-padding = 1
+format-disconnected-foreground = #eda55d
