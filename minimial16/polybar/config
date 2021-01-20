@@ -1,0 +1,311 @@
+;; ======================================= POLYBAR CONFIG ====================================
+
+;; ==================== COLORS ======================
+[colors]
+background = #050505
+foreground = #EEEEEE
+
+black       = #000
+red         = #FF000F
+green       = #0dff00
+yellow      = #FFFF00
+blue        = #00F
+magenta     = #ff00ee 
+cyan        = #00ffe5
+white       = #fff
+accent      = #0080F8
+
+;; ===================== BARS ========================
+
+[bar/full]
+width = 100%
+height = 38px
+offset-x = 0
+offset-y = 0
+radius = 0
+fixed-center = true
+enable-ipc = true
+
+background = #00000000
+
+module-margin-left = 0
+module-margin-right = 0
+
+padding-left = 0
+padding-right = 0
+
+font-0 = SF Pro Display:style=Normal:size=12;3
+font-1 = Ubuntu Nerd Font:style=Normal:size=13;3
+font-2 = Iosevka Nerd Font:size=15:antialias=true;3
+font-3 = Material Icons:size=15:antialias=true;3
+font-4 = DejaVu Sans Mono
+
+modules-center = text
+
+wm-restack = i3
+override-redirect = false
+
+[bar/right]
+width = 26.5%
+height = 35px
+offset-x = 1401
+offset-y = 10
+radius = 10
+fixed-center = true
+enable-ipc = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+module-margin-left = 0
+module-margin-right = 0
+
+padding-left = 0
+padding-right = 0
+
+font-0 = SF Pro Display:style=Regular:size=12;3
+font-1 = Ubuntu Nerd Font:style=Normal:size=13;3
+font-2 = Iosevka Nerd Font:size=15:antialias=true;3
+font-3 = Material Icons:size=15:antialias=true;4
+font-4 = DejaVu Sans Mono
+
+modules-center = pulseaudio battery wifi xkeyboard
+
+wm-restack = i3
+override-redirect = true
+
+[bar/middle]
+width = 16%
+height = 35px
+offset-x = 42.5%
+offset-y = 10
+radius = 10
+fixed-center = true
+enable-ipc = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = SF Pro Display:style=Italic:size=12;3
+font-1 = Ubuntu Nerd Font:style=Normal:size=13;3
+font-2 = Iosevka Nerd Font:size=15:antialias=true;3
+font-3 = Material Icons:size=15:antialias=true;3
+font-4 = DejaVu Sans Mono
+
+modules-center = spotify
+
+wm-restack = i3
+override-redirect = true
+
+[bar/left]
+width = 27.1%
+height = 35px
+offset-x = 11
+offset-y = 10
+radius = 10
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+module-margin-left = 0
+module-margin-right = 0
+
+padding-left = 0
+padding-right = 0
+
+font-0 = SF Pro Display:style=Regular:size=12;3
+font-1 = SF Pro Display:style=Medium:size=12;3
+font-2 = Iosevka Nerd Font:size=8:antialias=true;3
+font-3 = Material Icons:size=15:antialias=true;3
+font-4 = DejaVu Sans Mono
+
+modules-left = time i3
+
+wm-restack = i3
+override-redirect = true
+
+;; ====================== MODULES ==========================
+[module/text]
+type = custom/text
+content = " "
+
+[module/i3]
+type = internal/i3
+pin-workspaces = false
+enable-click = true
+enable-scroll = true
+format-padding = 0
+index-sort = true
+
+label-focused = %name%
+label-focused-background= #282828
+label-focused-padding = 2
+
+label-occupied = %name%
+label-occupied-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+label-empty = %name%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %name%
+label-visible-padding = 2
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%!
+label-urgent-background = #eda55d
+label-urgent-padding = 2
+
+[module/2bws]
+type = custom/script
+exec = ~/.config/polybar/scripts/2bws.sh
+interval = 0.01
+format-padding = 3
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+scroll-up = ~/.config/polybar/scripts/exec wscycle.sh -f
+scroll-down = ~/.config/polybar/scripts/exec wscycle.sh -r
+
+[module/wifi]
+type = internal/network
+interface = wlp6s0
+interval = 3.0
+tail = true
+
+format-connected = <ramp-signal><label-connected>
+format-connected-foreground = ${colors.foreground}
+format-connected-background = ${colors.background}
+format-connected-padding = 2
+label-connected = %essid% | %downspeed:1:10%
+;;label-connected = %essid% | %downspeed:1:10% & %upspeed:1:10%
+label-connected-background = ${colors.background}
+label-disconnected-padding = 2
+format-disconnected-prefix-padding = 2
+format-disconnected-prefix  = "睊"
+format-disconnected-foreground = #ab4642
+
+format-disconnected = "No-Wifi  "
+
+ramp-signal-0 = "直  "
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+battery = BAT0
+adapter = ADP0
+
+poll-interval = 2
+time-format = %H:%M
+
+format-charging-padding-right = 2
+format-full-padding-right = 2
+label-full-padding-right = 2
+label-discharging-padding-right = 2
+
+format-charging = "<animation-charging><label-charging>"
+format-discharging = "<ramp-capacity><label-discharging>"
+format-full-prefix = "   "
+format-full-prefix-foreground = #f7ca88
+format-full-prefix-background = ${colors.background}
+label-full = "FULL"
+label-full-background = ${colors.background}
+label-full-foreground = ${colors.foreground}
+label-charging-padding-right = 2
+label-charging-background = ${colors.background}
+label-charging-foreground = ${colors.foreground}
+label-discharging-foreground = ${colors.foreground}
+label-discharging-background = ${colors.background}
+
+ramp-capacity-0 = "  "
+ramp-capacity-1 = "  "
+ramp-capacity-2 = "  "
+ramp-capacity-3 = "  "
+ramp-capacity-4 = "  "
+ramp-capacity-5 = "  "
+ramp-capacity-padding-left = 2
+ramp-capacity-background = ${colors.background}
+
+animation-charging-padding-left = 2
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-background = ${colors.background}
+animation-charging-foreground = #a1b56c
+animation-charging-framerate = 750
+
+[module/spotify]
+type = custom/script
+tail = true
+format-prefix = "  "
+click-left = playerctl play-pause
+format-prefix-foreground = #a7c080
+interval = 1
+format = <label>
+format-foreground = #a7c080
+exec = ~/.config/polybar/scripts/spotify_status.sh
+
+[module/pulseaudio]
+type = internal/alsa
+;speaker-mixer = Speaker
+;headphone-mixer = Headphone
+;headphone-id = 16
+;mapped = true
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+format-muted-prefix = " "
+label-muted = MUTE
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+
+[module/time]
+type = internal/date
+interval = 1
+date = %a, %d %B
+time = %I:%M %
+label-font = 2
+label = "  %date% | %time% "
+label-foreground = ${colors.background}
+label-background = ${colors.foreground}
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+; List of indicators to ignore
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+blacklist-2 = caps lock
+
+; Available tags:
+;   <label-layout> (default)
+;   <label-indicator> (default)
+format = <label-layout> <label-indicator>
+format-spacing = 0
+
+; Available tokens:
+;   %layout%
+;   %name%
+;   %number%
+;   %icon%
+;   %variant% (unreleased)
+; Default: %layout%
+label-layout =   %layout%
+label-layout-padding = 2
